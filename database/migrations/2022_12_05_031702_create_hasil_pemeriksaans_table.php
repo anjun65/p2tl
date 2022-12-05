@@ -18,7 +18,6 @@ return new class extends Migration
 
             $table->foreignId('form1s_id')->constrained('form1s')->onDelete('cascade')->onUpdate('cascade');
             
-            $table->string('form1s_id');
             $table->string('hasil_pemeriksaan');
             $table->string('kesimpulan');
             $table->string('tindakan');

@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('stand_kwh_meter');
             $table->string('jenis_pembatas');
             $table->string('alat_pembatas_merk');
-            $table->string('rating_arus');
+            $table->string('rating_arus_2');
             
             $table->timestamps();
         });
