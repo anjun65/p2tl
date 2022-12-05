@@ -1,0 +1,46 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('wiring_app_not_langsungs', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreignId('form1s_id')->constrained('form1s')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('terminal1');
+            $table->string('terminal2');
+            $table->string('terminal3');
+            $table->string('terminal4');
+            $table->string('terminal5');
+            $table->string('terminal6');
+            $table->string('terminal7');
+            $table->string('terminal8');
+            $table->string('terminal9');
+            $table->string('terminal11');
+            $table->string('nilai_grounding');
+            $table->string('keterangan_wiringapp');
+            
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('wiring_app_not_langsungs');
+    }
+};

@@ -29,4 +29,8 @@ Route::middleware([
     Route::get('/admin/users', function () {
         return view('admin.users');
     })->name('admin-user');;
+
+    Route::get('/admin/work-orders', function () {
+        return view('admin.work-orders');
+    })->name('admin-wo');
 });
