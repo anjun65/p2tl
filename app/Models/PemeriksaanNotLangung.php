@@ -17,7 +17,6 @@ class PemeriksaanNotLangung extends Model
         'pembatas_jenis',
         'pembatas_merk',
         'pembatas_arus',
-
     ];
 
 }
