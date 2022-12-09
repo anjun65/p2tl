@@ -89,7 +89,6 @@
             </div>
         </div>
     </div>
-=
 
     <!-- Save Product Modal -->
     <form wire:submit.prevent="save">

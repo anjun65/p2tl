@@ -11,9 +11,17 @@ class WorkOrder extends Model
 
     protected $fillable = [
         'users_id',
-        'langitude',
+        'id_pelanggan',
+        'nama_pelanggan',
         'latitude',
+        'longitude',
         'alamat',
+        'tarif',
+        'daya',
+        'rbm',
+        'lgkh',
+        'fkm',
+        'keterangan_p2tl',
     ];
 
 }

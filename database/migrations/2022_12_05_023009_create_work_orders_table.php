@@ -15,10 +15,18 @@ return new class extends Migration
     {
         Schema::create('work_orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('users_id');
+            $table->string('id_pelanggan');
+            $table->string('nama_pelanggan');
             $table->string('latitude');
             $table->string('longitude');
             $table->string('alamat');
+            $table->string('tarif');
+            $table->string('daya');
+            $table->string('rbm');
+            $table->string('lgkh');
+            $table->string('fkm');
+            $table->string('keterangan_p2tl');
 
             $table->timestamps();
         });
