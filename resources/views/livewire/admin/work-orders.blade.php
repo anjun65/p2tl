@@ -211,4 +211,26 @@
             </x-slot>
         </x-modal.dialog>
     </form>
+
+    <form wire:submit.prevent="save">
+        <x-modal.dialog wire:model.defer="showJamNyalaModal">
+            <x-slot name="title">Jam Nyala</x-slot>
+
+            <x-slot name="content">
+                <x-input.group for="id_pelanggan" label="ID Pelanggan" :error="$errors->first('editing.id_pelanggan')">
+                    <x-input.text wire:model="editing.id_pelanggan" id="id_pelanggan" placeholder="ID Pelanggan" />
+                </x-input.group>
+
+                <x-input.group for="nama_pelanggan" label="Nama Pelanggan" :error="$errors->first('editing.nama_pelanggan')">
+                    <x-input.text wire:model="editing.nama_pelanggan" id="nama_pelanggan" placeholder="Nama Pelanggan" />
+                </x-input.group>
+            </x-slot>
+
+            <x-slot name="footer">
+                <x-button.secondary wire:click="$set('showEditModal', false)">Cancel</x-button.secondary>
+
+                <x-button.primary type="submit">Save</x-button.primary>
+            </x-slot>
+        </x-modal.dialog>
+    </form>
 </div>

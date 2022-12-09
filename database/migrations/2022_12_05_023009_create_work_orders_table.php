@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('rbm');
             $table->string('lgkh');
             $table->string('fkm');
-            $table->string('keterangan_p2tl');
+            $table->string('keterangan_p2tl')->nullable();
 
             $table->timestamps();
         });

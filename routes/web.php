@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Form1Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,9 +29,11 @@ Route::middleware([
 
     Route::get('/admin/users', function () {
         return view('admin.users');
-    })->name('admin-user');;
+    })->name('admin-user');
 
     Route::get('/admin/work-orders', function () {
         return view('admin.work-orders');
     })->name('admin-wo');
+
+    Route::get('admin/form1/', [Form1Controller::class, 'index']);
 });

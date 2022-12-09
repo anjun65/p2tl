@@ -28,33 +28,36 @@ class WorkOrderController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            $request->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required', 'string', 'min:8',]
-            ]);
+        $request->validate([
+            'users_id' => ['required', 'string', 'max:255'],
+            'id_pelanggan' => ['required', 'string', 'max:255'],
+            'nama_pelanggan' => ['required', 'string', 'max:255'],
+            'latitude' => ['required', 'number', 'max:255'],
+            'longitude' => ['required', 'number', 'max:255'],
+            'alamat' => ['required', 'number', 'max:255'],
+            'tarif' => ['required', 'number', 'max:255'],
+            'daya' => ['required', 'number', 'max:255'],
+            'rbm' => ['required', 'number', 'max:255'],
+            'lgkh' => ['required', 'number', 'max:255'],
+            'fkm' => ['required', 'number', 'max:255'],
+            'keterangan_p2tl' => ['required', 'string', 'max:255'],
+        ]);
 
-            User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
+        $workorder = WorkOrder::create([
+            'users_id' => $request->users_id,
+            'id_pelanggan' => $request->id_pelanggan,
+            'nama_pelanggan' => $request->nama_pelanggan,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'alamat' => $request->alamat,
+            'tarif' => $request->tarif,
+            'daya' => $request->daya,
+            'rbm' => $request->rbm,
+            'lgkh' => $request->lgkh,
+            'fkm' => $request->fkm,
+            'keterangan_p2tl' => $request->keterangan_p2tl,
+        ]);
 
-            $user = User::where('email', $request->email)->first();
-
-            $tokenResult = $user->createToken('authToken')->plainTextToken;
-
-            return ResponseFormatter::success([
-                'access_token' => $tokenResult,
-                'token_type' => 'Bearer',
-                'user' => $user
-            ],'User Registered');
-        } catch (Exception $error) {
-            return ResponseFormatter::error([
-                'message' => 'Something went wrong',
-                'error' => $error,
-            ],'Authentication Failed', 500);
-        }
+        return ResponseFormatter::success($workorder, 'Berhasil ditambahkan');
     }
 }

@@ -25,3 +25,4 @@ Route::post('register', [UserController::class, 'register']);
 
 
 Route::get('work-order', [WorkOrderController::class, 'all']);
+Route::post('work-order', [WorkOrderController::class, 'store']);

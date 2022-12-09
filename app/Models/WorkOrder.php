@@ -24,4 +24,9 @@ class WorkOrder extends Model
         'keterangan_p2tl',
     ];
 
+    public function jam_nyala()
+    {
+        return $this->hasMany(WorkOrder::class, 'works_id', 'id');
+    }
+
 }
