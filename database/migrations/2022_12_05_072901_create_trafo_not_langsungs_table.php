@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('form1s_id')->constrained('form1s')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('form1s_id');
             $table->string('trafoct_merk');
             $table->string('trafoct_cls');
             $table->string('trafoct_rasio');
