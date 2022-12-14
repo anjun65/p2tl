@@ -36,4 +36,5 @@ Route::middleware([
     })->name('admin-wo');
 
     Route::get('admin/form1/', [Form1Controller::class, 'index']);
+    Route::get('admin/form2/', [Form2Controller::class, 'index']);
 });
