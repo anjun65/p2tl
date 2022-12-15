@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('work_orders', function (Blueprint $table) {
             $table->id();
-            $table->string('users_id');
             $table->string('id_pelanggan');
             $table->string('nama_pelanggan');
             $table->string('latitude');

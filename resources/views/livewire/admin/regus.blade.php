@@ -1,11 +1,10 @@
 <div>
     <div class="py-4 space-y-4">
-
         
         <!-- Top Bar -->
         <div class="flex justify-between">
             <div class="w-2/4 flex space-x-4">
-                <x-input.text wire:model="filters.name" placeholder="Search Users..." />
+                <x-input.text wire:model="filters.name" placeholder="Search Group..." />
             </div>
 
             <div class="space-x-2 flex items-center">
@@ -28,10 +27,7 @@
                     <x-table.heading class="pr-0 w-8">
                         <x-input.checkbox wire:model="selectPage" />
                     </x-table.heading>
-                    <x-table.heading sortable multi-column wire:click="sortBy('name')" :direction="$sorts['name'] ?? null" class="w-full">Nama</x-table.heading>
-                    <x-table.heading sortable multi-column wire:click="sortBy('email')" :direction="$sorts['email'] ?? null">Email</x-table.heading>
-                    <x-table.heading sortable multi-column wire:click="sortBy('roles')" :direction="$sorts['roles'] ?? null">Roles</x-table.heading>
-                    <x-table.heading sortable multi-column wire:click="sortBy('regus_id')" :direction="$sorts['regus_id'] ?? null">Group</x-table.heading>
+                    <x-table.heading sortable multi-column wire:click="sortBy('name_regu')" :direction="$sorts['name_regu'] ?? null" class="w-full">Nama Regu</x-table.heading>
                     
                     <x-table.heading />
                 </x-slot>
@@ -57,25 +53,8 @@
                         <x-table.cell class="pr-0">
                             <x-input.checkbox wire:model="selected" value="{{ $item->id }}" />
                         </x-table.cell>
-
                         <x-table.cell>
-                            <span class="text-cool-gray-900 font-medium">{{ $item->name }} </span>
-                        </x-table.cell>
-
-                        <x-table.cell>
-                            <span class="text-cool-gray-900 font-medium">{{ $item->email }}</span>
-                        </x-table.cell>
-
-                        <x-table.cell>
-                            <span class="text-cool-gray-900 font-medium">{{ $item->roles }}</span>
-                        </x-table.cell>
-
-                        <x-table.cell>
-                            <span class="text-cool-gray-900 font-medium">
-                                @if (!empty($item->regu->nama_regu))
-                                    {{ $item->regu->nama_regu }}
-                                @endif
-                            </span>
+                            <span class="text-cool-gray-900 font-medium">{{ $item->nama_regu }} </span>
                         </x-table.cell>
 
                         <x-table.cell>
@@ -84,10 +63,10 @@
                     </x-table.row>
                     @empty
                     <x-table.row>
-                        <x-table.cell colspan="8">
+                        <x-table.cell colspan="3">
                             <div class="flex justify-center items-center space-x-2">
                                 <x-icon.inbox class="h-8 w-8 text-cool-gray-400" />
-                                <span class="font-medium py-8 text-cool-gray-400 text-xl">No User found...</span>
+                                <span class="font-medium py-8 text-cool-gray-400 text-xl">No Group found...</span>
                             </div>
                         </x-table.cell>
                     </x-table.row>
@@ -108,38 +87,8 @@
 
             <x-slot name="content">
 
-                <x-input.group for="name" label="Name" :error="$errors->first('editing.name')">
-                    <x-input.text wire:model="editing.name" placeholder="Name" />
-                </x-input.group>
-
-                <x-input.group for="email" label="Email" :error="$errors->first('editing.email')">
-                    <x-input.text type="email" wire:model="editing.email" placeholder="Email" />
-                </x-input.group>
-
-                <x-input.group for="password" label="Password" :error="$errors->first('password')">
-                    <x-input.text type="password" wire:model="password" placeholder="Password" />
-                </x-input.group>
-
-                <x-input.group for="roles" label="Roles" :error="$errors->first('editing.roles')">
-                    <x-input.select wire:model="editing.roles" id="roles">
-                        @forelse ($roles as $value => $label)
-                            <option value="{{ $value }}">{{ $label }}</option>
-                        @empty
-                            <option value="">No Roles Exist</option>
-                        @endforelse
-                    </x-input.select>
-                </x-input.group>
-
-
-                <x-input.group for="regus_id" label="Group" :error="$errors->first('editing.regus_id')">
-                    <x-input.select wire:model="editing.regus_id" id="regus_id">
-                        <option value="">Pilih Regu</option>
-                        @forelse ($regus as $regu)
-                            <option value="{{ $regu->id }}">{{ $regu->nama_regu }}</option>
-                        @empty
-                            <option value="">No Group Exist</option>
-                        @endforelse
-                    </x-input.select>
+                <x-input.group for="name" label="Name" :error="$errors->first('editing.nama_regu')">
+                    <x-input.text wire:model="editing.nama_regu" placeholder="Name" />
                 </x-input.group>
             </x-slot>
 

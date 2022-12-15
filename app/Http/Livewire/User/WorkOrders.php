@@ -1,39 +1,39 @@
 <?php
 
-namespace App\Http\Livewire\Admin;
+namespace App\Http\Livewire\User;
 
 use Livewire\Component;
 use App\Http\Livewire\DataTable\WithSorting;
 use App\Http\Livewire\DataTable\WithCachedRows;
 use App\Http\Livewire\DataTable\WithBulkActions;
 use App\Http\Livewire\DataTable\WithPerPagePagination;
+use App\Models\BeritaAcara;
 use App\Models\Regu;
+use App\Models\WorkOrder;
 use App\Models\User;
+use Livewire\WithFileUploads;
+use App\Models\JamNyala;
 
-class Users extends Component
+class WorkOrders extends Component
 {
     use WithPerPagePagination, WithSorting, WithBulkActions, WithCachedRows;
 
+    use WithFileUploads;
     public $showEditModal = false;
     public $showFilters = false;
     public $filters = [
         'name' => '',
     ];
 
-    public User $editing;
-    
-    public $password;
+    public $upload_ba;
+    public WorkOrder $editing;
 
     protected $queryString = ['sorts'];
 
     protected $listeners = ['refreshTransactions' => '$refresh'];
 
     public function rules() { return [
-        'editing.name' => 'nullable',
-        'editing.email' => 'sometimes|nullable|email',
-        'password' => 'nullable',
-        'editing.roles' => 'required',
-        'editing.regus_id' => 'nullable',
+        'editing.keterangan_p2tl' => 'nullable',
     ]; }
 
     public function mount() { $this->editing = $this->makeBlankTransaction(); }
@@ -41,7 +41,7 @@ class Users extends Component
 
     public function makeBlankTransaction()
     {
-        return User::make();
+        return WorkOrder::make();
     }
 
     public function toggleShowFilters()
@@ -60,7 +60,7 @@ class Users extends Component
         $this->showEditModal = true;
     }
 
-    public function edit(User $transaction)
+    public function edit(WorkOrder $transaction)
     {
         $this->useCachedRows();
 
@@ -69,13 +69,22 @@ class Users extends Component
         $this->showEditModal = true;
     }
 
-    
-
     public function save()
     {
         $this->validate();
 
+        // $new_users = $this->editing->users_id;
+        
+        // $this->editing->users_id = implode(",", $this->editing->users_id);
+
         $this->editing->save();
+
+        if($this->upload_ba){
+            BeritaAcara::create([
+                'works_id' => $this->editing->id,
+                'path_ba_pemeriksaan'  => $this->upload_ba->store('assets/ba_pemeriksaan','public'),
+            ]);
+        }
 
         $this->notify('Data telah tersimpan');
 
@@ -86,7 +95,7 @@ class Users extends Component
 
     public function getRowsQueryProperty()
     {
-        $query = User::query()
+        $query = WorkOrder::query()
             ->when($this->filters['name'], fn($query, $name) => $query->where('name', 'like', '%'.$name.'%'));
 
         return $this->applySorting($query);
@@ -99,15 +108,29 @@ class Users extends Component
         });
     }
 
+
+    public function download_berita_acara($id){
+        $berkas = BeritaAcara::where('works_id', $id)->first();
+
+        return response()->download(storage_path('app/public/'.$berkas->path_ba_pemeriksaan)); 
+    }
+
+
     public function render()
     {
-        $roles = User::ROLES;
         $regus = Regu::all();
+        $keterangan = WorkOrder::Keterangan;
 
-        return view('livewire.admin.users', [
+        $jam_nyala = array();
+
+        if($this->editing->id){
+            $jam_nyala = JamNyala::where('works_id', $this->editing->id)->get();
+        }
+
+        return view('livewire.user.work-orders', [
             'items' => $this->rows,
-            'roles' => $roles,
-            'regus' => $regus,
+            'keterangan' => $keterangan,
+            'jam_nyala' => $jam_nyala,
         ]);
     }
 }

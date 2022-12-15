@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Redirect::route('login');
 });
 
 Route::middleware([
@@ -33,6 +33,11 @@ Route::middleware([
 
     Route::get('/admin/work-orders', function () {
         return view('admin.work-orders');
+    })->name('admin-wo');
+    
+
+    Route::get('/user/work-orders', function () {
+        return view('user.work-orders');
     })->name('admin-wo');
 
     Route::get('admin/form1/', [Form1Controller::class, 'index']);

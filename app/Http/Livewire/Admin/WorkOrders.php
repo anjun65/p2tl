@@ -7,15 +7,20 @@ use App\Http\Livewire\DataTable\WithSorting;
 use App\Http\Livewire\DataTable\WithCachedRows;
 use App\Http\Livewire\DataTable\WithBulkActions;
 use App\Http\Livewire\DataTable\WithPerPagePagination;
-
+use App\Models\Regu;
 use App\Models\WorkOrder;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use App\Models\JamNyala;
+use Illuminate\Support\Carbon;
 
 class WorkOrders extends Component
 {
     use WithPerPagePagination, WithSorting, WithBulkActions, WithCachedRows;
 
     public $showEditModal = false;
+    public $jam_nyala_showEditModal = false;
+    
     public $showFilters = false;
     public $filters = [
         'name' => '',
@@ -23,12 +28,14 @@ class WorkOrders extends Component
 
     public WorkOrder $editing;
 
+    public JamNyala $nyala_model;
+
     protected $queryString = ['sorts'];
 
     protected $listeners = ['refreshTransactions' => '$refresh'];
 
     public function rules() { return [
-        'editing.users_id' => 'required',
+        'editing.regus_id' => 'required',
         'editing.id_pelanggan' => 'required',
         'editing.nama_pelanggan' => 'required',
         'editing.latitude' => 'required',
@@ -40,9 +47,13 @@ class WorkOrders extends Component
         'editing.lgkh' => 'required',
         'editing.fkm' => 'required',
         'editing.keterangan_p2tl' => 'nullable',
+        'nyala_model.tanggal' => 'required',
+        'nyala_model.jumlah' => 'required',
     ]; }
 
-    public function mount() { $this->editing = $this->makeBlankTransaction(); }
+    public function mount() { $this->editing = $this->makeBlankTransaction();
+        $this->nyala_model = JamNyala::make();
+    }
     public function updatedFilters() { $this->resetPage(); }
 
     public function makeBlankTransaction()
@@ -55,6 +66,11 @@ class WorkOrders extends Component
         $this->useCachedRows();
 
         $this->showFilters = ! $this->showFilters;
+    }
+
+    public function jam_nyala_create()
+    {
+        $this->jam_nyala_showEditModal = true;
     }
 
     public function create()
@@ -75,14 +91,24 @@ class WorkOrders extends Component
         $this->showEditModal = true;
     }
 
-    public function save()
+    public function jam_nyala_save(JamNyala $nyala_mode)
     {
         $this->validate();
 
-        $new_users = $this->editing->users_id;
+        $this->nyala_model->fill([
+            'works_id' => $this->editing->id,
+        ]);
 
-        
-        $this->editing->users_id = implode(",", $this->editing->users_id);
+        $this->nyala_model->save();
+
+        $this->notify('Data telah tersimpan');
+
+        $this->jam_nyala_showEditModal = false;
+    }
+
+    public function save()
+    {
+        $this->validate();
 
         $this->editing->save();
 
@@ -110,11 +136,20 @@ class WorkOrders extends Component
 
     public function render()
     {
-        $users = User::all();
+        $regus = Regu::all();
+        $keterangan = WorkOrder::Keterangan;
+
+        $jam_nyala = array();
+
+        if($this->editing->id){
+            $jam_nyala = JamNyala::where('works_id', $this->editing->id)->get();
+        }
 
         return view('livewire.admin.work-orders', [
             'items' => $this->rows,
-            'users' => $users,
+            'regus' => $regus,
+            'keterangan' => $keterangan,
+            'jam_nyala' => $jam_nyala,
         ]);
     }
 }

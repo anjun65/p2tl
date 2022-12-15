@@ -7,10 +7,11 @@ use App\Http\Livewire\DataTable\WithSorting;
 use App\Http\Livewire\DataTable\WithCachedRows;
 use App\Http\Livewire\DataTable\WithBulkActions;
 use App\Http\Livewire\DataTable\WithPerPagePagination;
-use App\Models\Regu;
-use App\Models\User;
 
-class Users extends Component
+use App\Models\User;
+use App\Models\Regu;
+
+class Regus extends Component
 {
     use WithPerPagePagination, WithSorting, WithBulkActions, WithCachedRows;
 
@@ -20,20 +21,14 @@ class Users extends Component
         'name' => '',
     ];
 
-    public User $editing;
-    
-    public $password;
+    public Regu $editing;
 
     protected $queryString = ['sorts'];
 
     protected $listeners = ['refreshTransactions' => '$refresh'];
 
     public function rules() { return [
-        'editing.name' => 'nullable',
-        'editing.email' => 'sometimes|nullable|email',
-        'password' => 'nullable',
-        'editing.roles' => 'required',
-        'editing.regus_id' => 'nullable',
+        'editing.nama_regu' => 'required',
     ]; }
 
     public function mount() { $this->editing = $this->makeBlankTransaction(); }
@@ -41,7 +36,7 @@ class Users extends Component
 
     public function makeBlankTransaction()
     {
-        return User::make();
+        return Regu::make();
     }
 
     public function toggleShowFilters()
@@ -60,7 +55,7 @@ class Users extends Component
         $this->showEditModal = true;
     }
 
-    public function edit(User $transaction)
+    public function edit(Regu $transaction)
     {
         $this->useCachedRows();
 
@@ -86,7 +81,7 @@ class Users extends Component
 
     public function getRowsQueryProperty()
     {
-        $query = User::query()
+        $query = Regu::query()
             ->when($this->filters['name'], fn($query, $name) => $query->where('name', 'like', '%'.$name.'%'));
 
         return $this->applySorting($query);
@@ -101,13 +96,11 @@ class Users extends Component
 
     public function render()
     {
-        $roles = User::ROLES;
-        $regus = Regu::all();
+        $user = User::all();
 
-        return view('livewire.admin.users', [
+        return view('livewire.admin.regus', [
             'items' => $this->rows,
-            'roles' => $roles,
-            'regus' => $regus,
+            'user' => $user,
         ]);
     }
 }

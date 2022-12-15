@@ -29,4 +29,15 @@ class WorkOrder extends Model
         return $this->hasMany(WorkOrder::class, 'works_id', 'id');
     }
 
+    const Keterangan = [
+        'BA' => 'Pemeriksaan Dengan BA',
+        'RK' => 'Rumah Kosong/Bangunan tidak dihuni',
+        'TO' => 'Tidak ada Orang',
+        'Normal' => 'Normal | Diperiksa Tanpa BA',
+    ];
+
+    public function regu()
+    {
+        return $this->belongsTo(Regu::class, 'regus_id', 'id');
+    }
 }
