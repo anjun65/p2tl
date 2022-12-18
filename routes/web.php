@@ -36,6 +36,11 @@ Route::middleware([
     })->name('admin-wo');
     
 
+    Route::get('/admin/pelanggaran', function () {
+        return view('admin.pelanggaran');
+    })->name('admin-pelanggaran');
+    
+
     Route::get('/user/work-orders', function () {
         return view('user.work-orders');
     })->name('admin-wo');

@@ -20,6 +20,10 @@
                         {{ __('Work Orders') }}
                     </x-jet-nav-link>
 
+                    <x-jet-nav-link href="{{ route('admin-pelanggaran') }}" :active="request()->routeIs('admin-pelanggaran')">
+                        {{ __('Pelanggaran') }}
+                    </x-jet-nav-link>
+
                     <x-jet-nav-link href="{{ route('admin-user') }}" :active="request()->routeIs('admin-user')">
                         {{ __('Users') }}
                     </x-jet-nav-link>
@@ -153,6 +157,10 @@
 
             <x-jet-responsive-nav-link href="{{ route('admin-wo') }}" :active="request()->routeIs('admin-wo')">
                 {{ __('Work Orders') }}
+            </x-jet-responsive-nav-link>
+
+            <x-jet-responsive-nav-link href="{{ route('admin-pelanggaran') }}" :active="request()->routeIs('admin-pelanggaran')">
+                {{ __('Pelanggaran') }}
             </x-jet-responsive-nav-link>
 
             <x-jet-responsive-nav-link href="{{ route('admin-user') }}" :active="request()->routeIs('admin-user')">

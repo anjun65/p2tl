@@ -47,8 +47,8 @@ class WorkOrders extends Component
         'editing.lgkh' => 'required',
         'editing.fkm' => 'required',
         'editing.keterangan_p2tl' => 'nullable',
-        'nyala_model.tanggal' => 'required',
-        'nyala_model.jumlah' => 'required',
+        'nyala_model.tanggal' => 'nullable',
+        'nyala_model.jumlah' => 'nullable',
     ]; }
 
     public function mount() { $this->editing = $this->makeBlankTransaction();
@@ -70,6 +70,10 @@ class WorkOrders extends Component
 
     public function jam_nyala_create()
     {
+        $this->useCachedRows();
+
+        if ($this->nyala_model->getKey()) $this->nyala_model = JamNyala::make();
+
         $this->jam_nyala_showEditModal = true;
     }
 
