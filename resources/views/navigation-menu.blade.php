@@ -21,7 +21,7 @@
                     </x-jet-nav-link>
 
                     <x-jet-nav-link href="{{ route('admin-pelanggaran') }}" :active="request()->routeIs('admin-pelanggaran')">
-                        {{ __('Pelanggaran') }}
+                        {{ __('Berita Acara') }}
                     </x-jet-nav-link>
 
                     <x-jet-nav-link href="{{ route('admin-user') }}" :active="request()->routeIs('admin-user')">
@@ -160,7 +160,7 @@
             </x-jet-responsive-nav-link>
 
             <x-jet-responsive-nav-link href="{{ route('admin-pelanggaran') }}" :active="request()->routeIs('admin-pelanggaran')">
-                {{ __('Pelanggaran') }}
+                {{ __('Berita Acara') }}
             </x-jet-responsive-nav-link>
 
             <x-jet-responsive-nav-link href="{{ route('admin-user') }}" :active="request()->routeIs('admin-user')">
