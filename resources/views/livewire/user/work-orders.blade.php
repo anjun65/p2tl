@@ -201,6 +201,7 @@
                         </x-input.file-upload>
                     </x-input.group>
                     
+                    @if (!empty($this->editing->ba_pemeriksaan->path_ba_pemeriksaan))
                     <x-input.group label="Upload Ba" for="upload_ba" :error="$errors->first('upload_ba')">
                             <x-jet-button wire:click="download_berita_acara({{ $editing->id }})">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 pr-1">
@@ -210,6 +211,7 @@
                             </x-jet-button>
                         </span>
                     </x-input.group>
+                    @endif
                 @endif
                 
             </x-slot>

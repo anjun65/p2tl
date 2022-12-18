@@ -17,4 +17,9 @@ class Pelanggaran extends Model
         'path_video',
     ];
 
+    public function work()
+    {
+        return $this->belongsTo(WorkOrder::class, 'works_id', 'id');
+    }
+
 }

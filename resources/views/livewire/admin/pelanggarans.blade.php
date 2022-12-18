@@ -66,7 +66,7 @@
                         </x-table.cell>
 
                         <x-table.cell>
-                            <span class="text-gray-900 font-medium">{{ $item->works_id }} |</span>
+                            <span class="text-gray-900 font-medium">{{ $item->work->nama_pelanggan }}</span>
                         </x-table.cell>
 
                                 <x-table.cell>

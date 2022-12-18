@@ -9,6 +9,7 @@ use App\Http\Livewire\DataTable\WithBulkActions;
 use App\Http\Livewire\DataTable\WithPerPagePagination;
 use App\Models\Regu;
 use App\Models\WorkOrder;
+use App\Models\BeritaAcara;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\JamNyala;
@@ -137,6 +138,13 @@ class WorkOrders extends Component
             return $this->applyPagination($this->rowsQuery);
         });
     }
+
+    public function download_berita_acara($id){
+        $berkas = BeritaAcara::where('works_id', $id)->first();
+
+        return response()->download(storage_path('app/public/'.$berkas->path_ba_pemeriksaan)); 
+    }
+
 
     public function render()
     {

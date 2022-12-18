@@ -40,4 +40,9 @@ class WorkOrder extends Model
     {
         return $this->belongsTo(Regu::class, 'regus_id', 'id');
     }
+
+    public function ba_pemeriksaan()
+    {
+        return $this->hasOne(BeritaAcara::class, 'works_id', 'id');
+    }
 }

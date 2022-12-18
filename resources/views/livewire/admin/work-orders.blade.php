@@ -250,11 +250,26 @@
                         @forelse ($keterangan as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
                         @empty
-                            <option value="">No Roles Exist</option>
+                            <option value="">Tidak ada keterangan yang diset</option>
                         @endforelse
                     </x-input.select>
                 </x-input.group>
+                
+
+                @if (!empty($this->editing->ba_pemeriksaan->path_ba_pemeriksaan))
+                    <x-input.group label="Upload Ba" for="upload_ba" :error="$errors->first('upload_ba')">
+                        <x-jet-button wire:click="download_berita_acara({{ $editing->id }})">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 pr-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                            </svg> 
+                            Download Berita Acara
+                        </x-jet-button>
+                    </x-input.group>
+                @endif
+                
             </x-slot>
+
+            
 
             <x-slot name="footer">
                 <x-button.secondary wire:click="$set('showEditModal', false)">Cancel</x-button.secondary>

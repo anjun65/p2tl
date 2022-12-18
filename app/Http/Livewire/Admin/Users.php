@@ -31,7 +31,7 @@ class Users extends Component
     public function rules() { return [
         'editing.name' => 'nullable',
         'editing.email' => 'sometimes|nullable|email',
-        'password' => 'nullable',
+        'password' => 'required',
         'editing.roles' => 'required',
         'editing.regus_id' => 'nullable',
     ]; }
@@ -73,7 +73,13 @@ class Users extends Component
 
     public function save()
     {
+
+        dd("test");
         $this->validate();
+
+        $this->editing->fill([
+            'password' => $this->password,
+        ]);
 
         $this->editing->save();
 
