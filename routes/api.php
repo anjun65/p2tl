@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\WorkOrderController;
+use App\Http\Controllers\API\baPemeriksaanController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,3 +27,5 @@ Route::post('register', [UserController::class, 'register']);
 
 Route::get('work-order', [WorkOrderController::class, 'all']);
 Route::post('work-order', [WorkOrderController::class, 'store']);
+
+Route::post('ba-pemeriksaan', [baPemeriksaanController::class, 'store']);
