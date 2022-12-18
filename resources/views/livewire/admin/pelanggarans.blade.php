@@ -5,7 +5,7 @@
         <!-- Top Bar -->
         <div class="flex justify-between">
             <div class="w-2/4 flex space-x-4">
-                <x-input.text wire:model="filters.name" placeholder="Serach ..." />
+                <x-input.text wire:model="filters.name" placeholder="Search ..." />
             </div>
 
             <div class="space-x-2 flex items-center">
