@@ -31,6 +31,9 @@ class WorkOrders extends Component
 
     public JamNyala $nyala_model;
 
+    public $upload_video;
+    public $upload_image;
+
     protected $queryString = ['sorts'];
 
     protected $listeners = ['refreshTransactions' => '$refresh'];
@@ -145,6 +148,17 @@ class WorkOrders extends Component
         return response()->download(storage_path('app/public/'.$berkas->path_ba_pemeriksaan)); 
     }
 
+    public function download_image($id){
+        $berkas = WorkOrder::find($id);
+
+        return response()->download(storage_path('app/public/'.$berkas->path_image)); 
+    }
+
+    public function download_video($id){
+        $berkas = WorkOrder::find($id);
+
+        return response()->download(storage_path('app/public/'.$berkas->path_video)); 
+    }
 
     public function render()
     {

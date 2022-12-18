@@ -40,6 +40,7 @@
                     <x-table.heading>BA Serah Terima BB</x-table.heading>
                     <x-table.heading>Image</x-table.heading>
                     <x-table.heading>Video</x-table.heading>
+                    <x-table.heading>Status</x-table.heading>
                     <x-table.heading />
                 </x-slot>
 
@@ -69,79 +70,82 @@
                             <span class="text-gray-900 font-medium">{{ $item->work->nama_pelanggan }}</span>
                         </x-table.cell>
 
-                                <x-table.cell>
-                                    <span class="text-cool-gray-900 font-medium">
-                                    @if ( $item->path_ba_pengambilan_bb)
-                                        <x-jet-button wire:click="download_ambil({{ $item->id }})">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 pr-1">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                                            </svg>
-                                            Download
-                                        </x-jet-button>
-                                    @else
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-red-700 w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <x-table.cell>
+                                <span class="text-cool-gray-900 font-medium">
+                                @if ( $item->path_ba_pengambilan_bb)
+                                    <x-jet-button wire:click="download_ambil({{ $item->id }})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 pr-1">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                                         </svg>
-                                        Belum terupload
-                                    @endif
-                                    </span>
-                                </x-table.cell>
+                                        Download
+                                    </x-jet-button>
+                                @else
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-red-700 w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    Belum terupload
+                                @endif
+                                </span>
+                            </x-table.cell>
 
 
-                                <x-table.cell>
-                                    <span class="text-cool-gray-900 font-medium">
-                                    @if ( $item->path_ba_serah_terima_bb)
-                                        <x-jet-button wire:click="download_serahterima({{ $item->id }})">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 pr-1">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                                            </svg>
-                                            Download
-                                        </x-jet-button>
-                                    @else
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-red-700 w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <x-table.cell>
+                                <span class="text-cool-gray-900 font-medium">
+                                @if ( $item->path_ba_serah_terima_bb)
+                                    <x-jet-button wire:click="download_serahterima({{ $item->id }})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 pr-1">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                                         </svg>
-                                        Belum terupload
-                                    @endif
-                                    </span>
-                                </x-table.cell>
+                                        Download
+                                    </x-jet-button>
+                                @else
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-red-700 w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    Belum terupload
+                                @endif
+                                </span>
+                            </x-table.cell>
 
-                                <x-table.cell>
-                                    <span class="text-cool-gray-900 font-medium">
-                                    @if ( $item->path_image)
-                                        <x-jet-button wire:click="download_image({{ $item->id }})">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 pr-1">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                                            </svg>
-                                            Download
-                                        </x-jet-button>
-                                    @else
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-red-700 w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <x-table.cell>
+                                <span class="text-cool-gray-900 font-medium">
+                                @if ( $item->path_image)
+                                    <x-jet-button wire:click="download_image({{ $item->id }})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 pr-1">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                                         </svg>
-                                        Belum terupload
-                                    @endif
-                                    </span>
-                                </x-table.cell>
+                                        Download
+                                    </x-jet-button>
+                                @else
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-red-700 w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    Belum terupload
+                                @endif
+                                </span>
+                            </x-table.cell>
 
-                                <x-table.cell>
-                                    <span class="text-cool-gray-900 font-medium">
-                                    @if ( $item->path_video)
-                                        <x-jet-button wire:click="download_video({{ $item->id }})">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 pr-1">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                                            </svg>
-                                            Download
-                                        </x-jet-button>
-                                    @else
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-red-700 w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <x-table.cell>
+                                <span class="text-cool-gray-900 font-medium">
+                                @if ( $item->path_video)
+                                    <x-jet-button wire:click="download_video({{ $item->id }})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 pr-1">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                                         </svg>
-                                        Belum terupload
-                                    @endif
-                                    </span>
-                                </x-table.cell>
+                                        Download
+                                    </x-jet-button>
+                                @else
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-red-700 w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    Belum terupload
+                                @endif
+                                </span>
+                            </x-table.cell>
                         
+                            <x-table.cell>
+                                <span class="text-gray-900 font-medium">{{ $item->status }}</span>
+                            </x-table.cell>
 
                         <x-table.cell>
                             <x-button.link wire:click="edit({{ $item->id }})">Edit</x-button.link>
@@ -183,7 +187,7 @@
                     </x-input.select>
                 </x-input.group>
                 
-                <x-input.group label="Upload BA Pengambilan BB" for="path_ba_pengambilan_bb" :error="$errors->first('path_ba_pengambilan_bb')">
+                {{-- <x-input.group label="Upload BA Pengambilan BB" for="path_ba_pengambilan_bb" :error="$errors->first('path_ba_pengambilan_bb')">
                     <x-input.file-upload wire:model="path_ba_pengambilan_bb" id="path_ba_pengambilan_bb" accept="image/png, image/jpeg, application/pdf">
                             @if ($path_ba_pengambilan_bb)
                                 {{ $path_ba_pengambilan_bb->getClientOriginalName() }}
@@ -213,6 +217,25 @@
                                 {{ $path_video->getClientOriginalName() }}
                             @endif
                     </x-input.file-upload>
+                </x-input.group>
+
+                <x-input.group label="Upload Video" for="path_video" :error="$errors->first('path_video')">
+                    <x-input.file-upload wire:model="path_video" id="path_video" accept="video/mp4,video/x-m4v,video/*">
+                            @if ($path_video)
+                                {{ $path_video->getClientOriginalName() }}
+                            @endif
+                    </x-input.file-upload>
+                </x-input.group> --}}
+
+                <x-input.group for="status" label="Status" :error="$errors->first('editing.status')">
+                    <x-input.select wire:model="editing.status" id="status">
+                        <option value="">Pilih Status</option>
+                        @forelse ($statuses as $value => $label)
+                            <option value="{{ $value }}">{{ $label }}</option>
+                        @empty
+                            <option value="">Tidak ada status yang diset</option>
+                        @endforelse
+                    </x-input.select>
                 </x-input.group>
 
             </x-slot>

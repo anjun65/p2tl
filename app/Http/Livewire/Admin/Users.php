@@ -10,6 +10,8 @@ use App\Http\Livewire\DataTable\WithPerPagePagination;
 use App\Models\Regu;
 use App\Models\User;
 
+use Illuminate\Support\Facades\Hash;
+
 class Users extends Component
 {
     use WithPerPagePagination, WithSorting, WithBulkActions, WithCachedRows;
@@ -31,7 +33,7 @@ class Users extends Component
     public function rules() { return [
         'editing.name' => 'nullable',
         'editing.email' => 'sometimes|nullable|email',
-        'password' => 'required',
+        'password' => 'nullable',
         'editing.roles' => 'required',
         'editing.regus_id' => 'nullable',
     ]; }
@@ -69,17 +71,16 @@ class Users extends Component
         $this->showEditModal = true;
     }
 
-    
+
 
     public function save()
     {
-
-        dd("test");
         $this->validate();
 
-        $this->editing->fill([
-            'password' => $this->password,
-        ]);
+        if ($this->password){
+
+            $this->editing->password = Hash::make($this->password);
+        }
 
         $this->editing->save();
 

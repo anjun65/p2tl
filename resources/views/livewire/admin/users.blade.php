@@ -122,6 +122,7 @@
 
                 <x-input.group for="roles" label="Roles" :error="$errors->first('editing.roles')">
                     <x-input.select wire:model="editing.roles" id="roles">
+                        <option value="">Pilih Roles</option>
                         @forelse ($roles as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
                         @empty

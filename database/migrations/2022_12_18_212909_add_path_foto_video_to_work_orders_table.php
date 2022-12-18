@@ -13,17 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pelanggarans', function (Blueprint $table) {
-            $table->id();
-
-            $table->foreignId('works_id')->constrained('work_orders')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('path_ba_pengambilan_bb')->nullable();
-            $table->string('path_ba_serah_terima_bb')->nullable();
+        Schema::table('work_orders', function (Blueprint $table) {
             $table->string('path_image')->nullable();
             $table->string('path_video')->nullable();
-
-
-            $table->timestamps();
         });
     }
 
@@ -34,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pelanggarans');
+        Schema::table('work_orders', function (Blueprint $table) {
+            //
+        });
     }
 };

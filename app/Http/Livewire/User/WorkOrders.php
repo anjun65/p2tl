@@ -26,6 +26,8 @@ class WorkOrders extends Component
     ];
 
     public $upload_ba;
+    public $upload_image;
+    public $upload_video;
     public WorkOrder $editing;
 
     protected $queryString = ['sorts'];
@@ -77,14 +79,28 @@ class WorkOrders extends Component
         
         // $this->editing->users_id = implode(",", $this->editing->users_id);
 
-        $this->editing->save();
-
         if($this->upload_ba){
             BeritaAcara::create([
                 'works_id' => $this->editing->id,
                 'path_ba_pemeriksaan'  => $this->upload_ba->store('assets/ba_pemeriksaan','public'),
             ]);
         }
+
+        if($this->upload_image){
+            $this->editing->fill([
+                'path_image' => $this->upload_image->store('assets/image','public'),
+            ]);
+        }
+
+        if($this->upload_video){
+            $this->editing->fill([
+                'path_video' => $this->upload_video->store('assets/video','public'),
+            ]);
+        }
+        
+        $this->editing->save();
+
+        
 
         $this->notify('Data telah tersimpan');
 
@@ -115,6 +131,17 @@ class WorkOrders extends Component
         return response()->download(storage_path('app/public/'.$berkas->path_ba_pemeriksaan)); 
     }
 
+    public function download_image($id){
+        $berkas = WorkOrder::find($id);
+
+        return response()->download(storage_path('app/public/'.$berkas->path_image)); 
+    }
+
+    public function download_video($id){
+        $berkas = WorkOrder::find($id);
+
+        return response()->download(storage_path('app/public/'.$berkas->path_video)); 
+    }
 
     public function render()
     {

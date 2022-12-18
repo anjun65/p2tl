@@ -202,7 +202,7 @@
                     </x-input.group>
                     
                     @if (!empty($this->editing->ba_pemeriksaan->path_ba_pemeriksaan))
-                    <x-input.group label="Upload Ba" for="upload_ba" :error="$errors->first('upload_ba')">
+                    <x-input.group label="Download Ba" for="upload_ba" :error="$errors->first('upload_ba')">
                             <x-jet-button wire:click="download_berita_acara({{ $editing->id }})">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 pr-1">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
@@ -212,6 +212,47 @@
                         </span>
                     </x-input.group>
                     @endif
+                @endif
+
+                <x-input.group label="Upload Image" for="upload_image" :error="$errors->first('upload_image')">
+                    <x-input.file-upload wire:model="upload_image" id="upload_image">
+                            @if ($upload_image)
+                                {{ $upload_image->getClientOriginalName() }}
+                            @endif
+                    </x-input.file-upload>
+                </x-input.group>
+                
+                @if (!empty($this->editing->path_image))
+                <x-input.group label="Download Image" for="upload_image" :error="$errors->first('upload_image')">
+                        <x-jet-button wire:click="download_image({{ $editing->id }})">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 pr-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                            </svg> 
+                            Download Image
+                        </x-jet-button>
+                    </span>
+                </x-input.group>
+                @endif
+
+
+                <x-input.group label="Upload Video" for="upload_video" :error="$errors->first('upload_video')">
+                    <x-input.file-upload wire:model="upload_video" id="upload_video">
+                            @if ($upload_video)
+                                {{ $upload_video->getClientOriginalName() }}
+                            @endif
+                    </x-input.file-upload>
+                </x-input.group>
+                
+                @if (!empty($this->editing->path_image))
+                <x-input.group label="Download Video" for="upload_video" :error="$errors->first('upload_video')">
+                        <x-jet-button wire:click="download_video({{ $editing->id }})">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 pr-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                            </svg> 
+                            Download Video
+                        </x-jet-button>
+                    </span>
+                </x-input.group>
                 @endif
                 
             </x-slot>

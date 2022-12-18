@@ -41,10 +41,11 @@ class Pelanggarans extends Component
 
     public function rules() { return [
         'editing.works_id' => 'required',
-        'path_ba_pengambilan_bb' => 'required',
+        'path_ba_pengambilan_bb' => 'nullable',
         'path_ba_serah_terima_bb' => 'nullable',
         'path_image' => 'nullable',
         'path_video' => 'nullable',
+        'editing.status' => 'nullable',
     ]; }
 
     public function mount() { $this->editing = $this->makeBlankTransaction(); }
@@ -169,10 +170,12 @@ class Pelanggarans extends Component
     {
 
         $work_orders= WorkOrder::all();
+        $statuses = Pelanggaran::Status;
         
         return view('livewire.admin.pelanggarans', [
             'items' => $this->rows,
             'work_orders' => $work_orders,
+            'statuses' => $statuses,
         ]);
     }
     

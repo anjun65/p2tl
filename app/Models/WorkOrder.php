@@ -22,6 +22,8 @@ class WorkOrder extends Model
         'lgkh',
         'fkm',
         'keterangan_p2tl',
+        'path_image',
+        'path_video',
     ];
 
     public function jam_nyala()

@@ -43,7 +43,7 @@ Route::middleware([
 
     Route::get('/user/work-orders', function () {
         return view('user.work-orders');
-    })->name('admin-wo');
+    })->name('user-wo');
 
     Route::get('admin/form1/', [Form1Controller::class, 'index']);
     Route::get('admin/form2/', [Form2Controller::class, 'index']);
