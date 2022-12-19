@@ -13,7 +13,7 @@ class baPemeriksaanController extends Controller
     {
         $ba = BeritaAcara::create([
             'works_id' => $request->works_id,
-            'path_ba_pemeriksaan' => $request->uploadFile,
+            'path_ba_pemeriksaan' => $request->uploadFile->store('assets/ba_pemeriksaan','public'),
         ]);
 
         return ResponseFormatter::success($ba,'BA Created');

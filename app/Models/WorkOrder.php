@@ -24,6 +24,7 @@ class WorkOrder extends Model
         'keterangan_p2tl',
         'path_image',
         'path_video',
+        'status',
     ];
 
     public function jam_nyala()
@@ -36,6 +37,11 @@ class WorkOrder extends Model
         'RK' => 'Rumah Kosong/Bangunan tidak dihuni',
         'TO' => 'Tidak ada Orang',
         'Normal' => 'Normal | Diperiksa Tanpa BA',
+    ];
+
+    const Status = [
+        'Open' => 'Open',
+        'Close' => 'Close',
     ];
 
     public function regu()

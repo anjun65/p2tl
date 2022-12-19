@@ -45,6 +45,7 @@
                     <x-table.heading sortable multi-column wire:click="sortBy('fkm')" :direction="$sorts['fkm'] ?? null">FKM</x-table.heading>
                     <x-table.heading>Regu</x-table.heading>
                     <x-table.heading>Keterangan</x-table.heading>
+                    <x-table.heading>Status</x-table.heading>
                     <x-table.heading />
                 </x-slot>
 
@@ -111,6 +112,10 @@
 
                         <x-table.cell>
                             <span class="text-gray-900 font-medium">{{ $item->keterangan_p2tl }}</span>
+                        </x-table.cell>
+
+                        <x-table.cell>
+                            <span class="text-gray-900 font-medium">{{ $item->status }}</span>
                         </x-table.cell>
 
                         <x-table.cell>
@@ -246,15 +251,21 @@
 
                 <x-input.group for="keterangan_p2tl" label="Keterangan" :error="$errors->first('editing.keterangan_p2tl')">
                     <x-input.select wire:model="editing.keterangan_p2tl" id="keterangan_p2tl">
-                        <option value="">Pilih keterangan</option>
-                        @forelse ($keterangan as $value => $label)
-                            <option value="{{ $value }}">{{ $label }}</option>
-                        @empty
-                            <option value="">Tidak ada keterangan yang diset</option>
-                        @endforelse
+                        <option value="{{ $editing->keterangan_p2tl }}">{{ $editing->keterangan_p2tl }}</option>
                     </x-input.select>
                 </x-input.group>
                 
+
+                <x-input.group for="status" label="Status" :error="$errors->first('editing.status')">
+                    <x-input.select wire:model="editing.status" id="status">
+                        <option value="">Pilih Status</option>
+                        @forelse ($statuses as $value => $label)
+                            <option value="{{ $value }}">{{ $label }}</option>
+                        @empty
+                            <option value="">Tidak ada status yang diset</option>
+                        @endforelse
+                    </x-input.select>
+                </x-input.group>
 
                 @if (!empty($this->editing->ba_pemeriksaan->path_ba_pemeriksaan))
                     <x-input.group label="Upload Ba" for="upload_ba" :error="$errors->first('upload_ba')">

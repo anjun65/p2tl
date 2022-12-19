@@ -164,6 +164,7 @@ class WorkOrders extends Component
     {
         $regus = Regu::all();
         $keterangan = WorkOrder::Keterangan;
+        $statuses = WorkOrder::Status;
 
         $jam_nyala = array();
 
@@ -176,6 +177,7 @@ class WorkOrders extends Component
             'regus' => $regus,
             'keterangan' => $keterangan,
             'jam_nyala' => $jam_nyala,
+            'statuses' => $statuses,
         ]);
     }
 }
